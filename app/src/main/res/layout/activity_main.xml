@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100">
+            <Button
+                android:id="@+id/loadFile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:text="Load File"/>
+            <Button
+                android:id="@+id/deepLink"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:text="DeepLink"/>
+        </LinearLayout>
+
+        <es.voghdev.pdfviewpager.library.PDFViewPager
+            android:id="@+id/pdfViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="480dp"/>
+    </LinearLayout>
+</ScrollView>
