@@ -18,7 +18,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="50"
-                android:text="Load File"/>
+                android:text="Save File"/>
             <Button
                 android:id="@+id/deepLink"
                 android:layout_width="0dp"

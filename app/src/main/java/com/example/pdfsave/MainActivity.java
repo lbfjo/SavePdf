@@ -26,7 +26,7 @@ public class MainActivity extends BaseSampleActivity {
     PDFViewPager pdfViewPager;
     BasePDFPagerAdapter adapter;
     Button btnLoad, btnDeepLink;
-
+    String sharedFolder = "default";
     final int REQUEST_CODE = 1;
 
     @Override
@@ -38,7 +38,12 @@ public class MainActivity extends BaseSampleActivity {
         btnLoad = findViewById(R.id.loadFile);
         btnDeepLink = findViewById(R.id.deepLink);
         pdfViewPager = findViewById(R.id.pdfViewPager);
-
+        File defaultFolder = new File(Environment.getExternalStorageDirectory(),sharedFolder);
+        if(!defaultFolder.exists()){
+            if (defaultFolder.mkdirs()){
+                Toast.makeText(this,"DIRECTORY CREATED",Toast.LENGTH_LONG).show();
+            }
+        }
         btnLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,7 +53,7 @@ public class MainActivity extends BaseSampleActivity {
         btnDeepLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                File pdfFolder = new File(Environment.getExternalStorageDirectory(),"teste");
+                File pdfFolder = new File(Environment.getExternalStorageDirectory(),sharedFolder);
                 Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.example.printingapp");
                 if (launchIntent != null) {
                     launchIntent.putExtra("path",pdfFolder.getAbsolutePath());
@@ -57,8 +62,6 @@ public class MainActivity extends BaseSampleActivity {
             }
         });
 
-        adapter = new PDFPagerAdapter(this, "1_doc.pdf");
-        pdfViewPager.setAdapter(adapter);
     }
 
     @Override

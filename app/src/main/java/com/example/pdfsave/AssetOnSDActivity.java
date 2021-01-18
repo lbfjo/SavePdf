@@ -29,8 +29,8 @@ import es.voghdev.pdfviewpager.library.asset.CopyAsset;
 import es.voghdev.pdfviewpager.library.asset.CopyAssetThreadImpl;
 
 public class AssetOnSDActivity extends BaseSampleActivity {
-    final String[] sampleAssets = {"1_doc.pdf"};
-
+    final String[] sampleAssets = {"adobe.pdf"};
+    String sharedFolder="default";
     PDFViewPager pdfViewPager;
     File pdfFolder;
 
@@ -40,7 +40,7 @@ public class AssetOnSDActivity extends BaseSampleActivity {
         setTitle(R.string.asset_on_sd);
         setContentView(R.layout.activity_asset_on_sd);
 
-        pdfFolder = new File(Environment.getExternalStorageDirectory(),"teste");
+        pdfFolder = new File(Environment.getExternalStorageDirectory(),sharedFolder);
         copyAssetsOnSDCard();
     }
 
@@ -66,7 +66,7 @@ public class AssetOnSDActivity extends BaseSampleActivity {
     }
 
     protected String getPdfPathOnSDCard() {
-        File f = new File(pdfFolder, "1_doc.pdf");
+        File f = new File(pdfFolder, "adobe.pdf");
         return f.getAbsolutePath();
     }
 
