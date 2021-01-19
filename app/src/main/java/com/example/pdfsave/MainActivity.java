@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,8 @@ import android.widget.Toast;
 import androidx.core.app.ActivityCompat;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import es.voghdev.pdfviewpager.library.PDFViewPager;
 import es.voghdev.pdfviewpager.library.adapter.BasePDFPagerAdapter;
@@ -34,19 +37,23 @@ public class MainActivity extends BaseSampleActivity {
         super.onCreate(savedInstanceState);
         setTitle("MainAppPdf");
         setContentView(R.layout.activity_main);
-
+        requestExternalStoragePermissions();
         btnLoad = findViewById(R.id.loadFile);
         btnDeepLink = findViewById(R.id.deepLink);
         pdfViewPager = findViewById(R.id.pdfViewPager);
-        File defaultFolder = new File(Environment.getExternalStorageDirectory(),sharedFolder);
-        if(!defaultFolder.exists()){
-            if (defaultFolder.mkdirs()){
-                Toast.makeText(this,"DIRECTORY CREATED",Toast.LENGTH_LONG).show();
-            }
-        }
+
+
         btnLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
+                    File defaultFolder = new File(Environment.getExternalStorageDirectory(),sharedFolder);
+                    if(!defaultFolder.exists()) {
+                        defaultFolder.mkdirs();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();  Log.e("IO","IO"+e);
+                }
                 requestPermissionsThenOpen(AssetOnSDActivity.class);
             }
         });
